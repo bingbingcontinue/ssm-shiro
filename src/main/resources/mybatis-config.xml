@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入外部的配置文件，此后就可以在当前的文件中使用${}的方式引用jdbc.properties中的属性
+-->
+<!--    <properties resource="jdbc.properties"/>-->
+
+
+    <settings>
+        <!--        java pojo中驼峰式与SQL中field下划线名字一一映射，开启-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--        开启延迟加载，true标识开启，减少内存消耗。在多表联查的分步查询中有效
+        配合<resultMap><association>标签下的fetchType="sager(立即加载)|lazy(延迟加载)"使用
+        -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--        按需加载，false表示开启。在多表联查的分步查询中有效-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+
+    <!--配置类型别名
+    在mybatis中使用别名表示一个具体的类型
+    -->
+<!--    <typeAliases>-->
+<!--        &lt;!&ndash;            <typeAlias type="com.example.pojo.User" alias="user_alias"/>&ndash;&gt;-->
+<!--        &lt;!&ndash;        通过包设置类型别名，指定包下将拥有默认别名，即类名且不区分大小写&ndash;&gt;-->
+<!--        <package name="org.demo.pojo"/>-->
+<!--    </typeAliases>-->
+    <plugins>
+        <!--设置分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
+
+    <!--    配置链接数据库的环境
+        default：配置默认的环境
+-->
+<!--    <environments default="development"> &lt;!&ndash;environments下可以配置多个环境environment&ndash;&gt;-->
+<!--        <environment id="development">-->
+<!--            &lt;!&ndash;-->
+<!--        transactionManager:配置事务管理器-->
+<!--        type：配置事务管理器类型，有两种类型JDBC和MANAGED-->
+<!--        JDBC：使用jdbc的原生事务管理方式,手动|自动 提交|回滚 事物-->
+<!--        MANAGED：被管理，由容器管理事物-->
+<!--&ndash;&gt;-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            &lt;!&ndash;    dataSource：设置数据源-->
+<!--        type：配置数据源类型 POOLED|UNPOOLED|JNDI-->
+<!--        POOLED：使用连接池-->
+<!--        UNPOOLED：不使用连接池 每次都重新创建链接-->
+<!--        JNDI：使用上下文中的数据源-->
+<!--&ndash;&gt;-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="${jdbc.driver}"/>-->
+<!--                <property name="url" value="${jdbc.url}"/>-->
+<!--                <property name="username" value="${jdbc.username}"/>-->
+<!--                <property name="password" value="${jdbc.password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+
+
+<!--        <environment id="UserMapperTest">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/ssm?serverTimezone=UTC"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="root"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
+
+    <!--    引入mybatis的映射文件，在映射文件写SQL语句-->
+<!--    <mappers>-->
+<!--        &lt;!&ndash;        <mapper resource="mappers/UserMapper.xml"/>&ndash;&gt;-->
+
+
+<!--        &lt;!&ndash;        以包的方式引入映射文件，但必须满足条件&ndash;&gt;-->
+<!--        &lt;!&ndash;        1.mapper接口和映射文件所在的包必须一致&ndash;&gt;-->
+<!--        &lt;!&ndash;        2.mapper接口的名字和映射文件的名字必须一致&ndash;&gt;-->
+<!--        &lt;!&ndash;        在resource下&ndash;&gt;-->
+<!--        <package name="com.aos.mapper"/>-->
+<!--    </mappers>-->
+</configuration>

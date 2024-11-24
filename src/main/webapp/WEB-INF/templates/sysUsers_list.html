@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th colspan="5">用户列表</th>
+    </tr>
+    <tr>
+        <th>流水号</th>
+        <th>用户名</th>
+        <th>部门</th>
+        <th>邮箱</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="user,status : ${sysUsers}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${user.userName}"></td>
+        <td th:text="${user.department}"></td>
+        <td th:text="${user.email}"></td>
+<!--        <td>-->
+<!--            <a th:href="">删除</a>-->
+<!--            <a th:href="">修改</a>-->
+<!--        </td>-->
+    </tr>
+
+</table>
+
+</body>
+</html>
